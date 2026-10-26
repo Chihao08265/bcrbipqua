@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ChiHao ⚡️ Masterpiece</title>
+    
+    <!-- =========================================
+         EXTERNAL FONTS & ICONS
+         ========================================= -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700;900&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* =========================================
+           MODULE 1: CSS VARIABLES (THEMES & BACKGROUNDS)
+           ========================================= */
+        :root {
+            /* Default Theme (Naruto) */
+            --bg-primary: #0f0f13;
+            --bg-secondary: rgba(25, 25, 35, 0.8);
+            --accent: #ff8c00;
+            --accent-glow: rgba(255, 140, 0, 0.4);
+            --accent-gradient: linear-gradient(135deg, #ff8c00, #ff2a00);
+            --text-light: #ffffff;
+            --text-muted: #a0a0b0;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --glass-blur: 25px;
+            
+            /* Game Colors */
+            --color-b: #ff3333;
+            --color-p: #3388ff;
+            --color-t: #33cc33;
+            --color-tai: #111111;
+            --color-xiu: #f0f0f0;
+            --color-win: #00ff88;
+            --color-lose: #ff3333;
+
+            /* Backgrounds (Anime) */
+            --bg-url: url('https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=1974&auto=format&fit=crop');
+        }
+
+        /* 10 Themes */
+        body.theme-1 { --accent: #ff8c00; --accent-glow: rgba(255, 140, 0, 0.4); --accent-gradient: linear-gradient(135deg, #ff8c00, #ff2a00); }
+        body.theme-2 { --accent: #00e5ff; --accent-glow: rgba(0, 229, 255, 0.4); --accent-gradient: linear-gradient(135deg, #00e5ff, #0055ff); }
+        body.theme-3 { --accent: #ff0055; --accent-glow: rgba(255, 0, 85, 0.4); --accent-gradient: linear-gradient(135deg, #ff0055, #7a00ff); }
+        body.theme-4 { --accent: #00ff88; --accent-glow: rgba(0, 255, 136, 0.4); --accent-gradient: linear-gradient(135deg, #00ff88, #008f4c); }
+        body.theme-5 { --accent: #fceb00; --accent-glow: rgba(252, 235, 0, 0.4); --accent-gradient: linear-gradient(135deg, #fceb00, #ff8c00); }
+        body.theme-6 { --accent: #c700ff; --accent-glow: rgba(199, 0, 255, 0.4); --accent-gradient: linear-gradient(135deg, #c700ff, #5e00ff); }
+        body.theme-7 { --accent: #ff0044; --accent-glow: rgba(255, 0, 68, 0.4); --accent-gradient: linear-gradient(135deg, #ff0044, #ff8c00); }
+        body.theme-8 { --accent: #00ffcc; --accent-glow: rgba(0, 255, 204, 0.4); --accent-gradient: linear-gradient(135deg, #00ffcc, #0055ff); }
+        body.theme-9 { --accent: #ffffff; --accent-glow: rgba(255, 255, 255, 0.4); --accent-gradient: linear-gradient(135deg, #ffffff, #aaaaaa); }
+        body.theme-10 { --accent: #ff6b00; --accent-glow: rgba(255, 107, 0, 0.4); --accent-gradient: linear-gradient(135deg, #ff6b00, #ff0044); }
+
+        /* 6 Backgrounds */
+        body.bg-1 { --bg-url: url('https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=1974&auto=format&fit=crop'); }
+        body.bg-2 { --bg-url: url('https://images.unsplash.com/photo-1618336753974-aae8e04506aa?q=80&w=2070&auto=format&fit=crop'); }
+        body.bg-3 { --bg-url: url('https://images.unsplash.com/photo-1628260412297-a3377e45006f?q=80&w=1974&auto=format&fit=crop'); }
+        body.bg-4 { --bg-url: url('https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=1974&auto=format&fit=crop'); }
+        body.bg-5 { --bg-url: url('https://images.unsplash.com/photo-1581833971358-2c5509b8c150?q=80&w=2071&auto=format&fit=crop'); }
+        body.bg-6 { --bg-url: url('https://images.unsplash.com/photo-1542451313-32e813a2c221?q=80&w=2070&auto=format&fit=crop'); }
+
+        /* =========================================
+           MODULE 2: GLOBAL RESET & TYPOGRAPHY
+           ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            outline: none;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            overflow: hidden;
+            transition: background-color 0.4s ease;
+        }
+
+        /* Lớp nền mờ (Background Overlay) */
+        #bg-layer {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: var(--bg-url);
+            background-size: cover;
+            background-position: center;
+            filter: blur(15px) brightness(0.3);
+            z-index: -1;
+            transition: background-image 0.5s ease;
+        }
+
+        /* =========================================
+           MODULE 3: LAYOUT STRUCTURE
+           ========================================= */
+        .app-layout {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+        }
+
+        /* --- SIDEBAR (BÊN TRÁI) --- */
+        .sidebar {
+            width: 260px;
+            background: var(--bg-secondary);
+            backdrop-filter: blur(var(--glass-blur));
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            z-index: 10;
+            transition: all 0.3s;
+        }
+
+        .brand-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 30px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px var(--accent-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .brand-logo span {
+            -webkit-text-fill-color: initial;
+            color: var(--accent);
+            animation: pulseLightning 2s infinite alternate;
+        }
+
+        @keyframes pulseLightning {
+            0% { filter: drop-shadow(0 0 2px var(--accent)); }
+            100% { filter: drop-shadow(0 0 20px var(--accent)); }
+        }
+
+        /* Menu Items */
+        .menu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .menu-item {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 15px 20px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.2s;
+        }
+
+        .menu-item i {
+            font-size: 1.2rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+        }
+
+        .menu-item.active {
+            background: var(--accent-gradient);
+            color: #fff;
+            box-shadow: 0 10px 20px var(--accent-glow);
+            transform: translateX(5px);
+        }
+
+        /* User Profile Box */
+        .user-profile {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #fff;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .user-info h4 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .user-info p {
+            font-size: 0.85rem;
+            color: var(--color-win);
+            font-weight: 800;
+        }
+
+        .btn-logout {
+            background: rgba(255, 51, 51, 0.2);
+            color: var(--color-lose);
+            border: 1px solid var(--color-lose);
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.2s;
+        }
+        .btn-logout:hover { background: var(--color-lose); color: #fff; }
+
+        /* --- MAIN CONTENT (BÊN PHẢI) --- */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        /* =========================================
+           MODULE 4: SCREENS & TAB PANES
+           ========================================= */
+        .screen { display: none; width: 100%; height: 100%; animation: fadeIn 0.3s; }
+        .screen.active { display: block; }
+
+        .tab-pane { display: none; animation: slideUp 0.3s; }
+        .tab-pane.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* =========================================
+           MODULE 5: LOGIN & PIN SCREEN
+           ========================================= */
+        .auth-box {
+            background: var(--bg-secondary);
+            backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            margin: 50px auto;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .auth-box h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+        }
+
+        .input-field {
+            width: 100%;
+            background: rgba(0,0,0,0.3);
+            border: 2px solid var(--border-color);
+            color: #fff;
+            padding: 15px 20px;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: 700;
+            transition: all 0.2s;
+        }
+
+        .input-field:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: #fff;
+            border: none;
+            width: 100%;
+            padding: 16px;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 10px 20px var(--accent-glow);
+            transition: all 0.2s;
+            text-transform: uppercase;
+        }
+        .btn-primary:active { transform: scale(0.98); }
+
+        .error-text {
+            color: var(--color-lose);
+            font-size: 0.9rem;
+            font-weight: 800;
+            margin-top: 15px;
+            display: none;
+        }
+
+        /* PIN Inputs */
+        .pin-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 30px 0;
+        }
+        .pin-box {
+            width: 50px;
+            height: 60px;
+            background: rgba(0,0,0,0.3);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-align: center;
+        }
+        .pin-box:focus { border-color: var(--accent); box-shadow: 0 0 15px var(--accent-glow); }
+
+        /* =========================================
+           MODULE 6: GAME INTERFACE (BÀN CHƠI)
+           ========================================= */
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .game-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        /* Bảng hiển thị cầu */
+        .history-board {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            min-height: 90px;
+            margin-bottom: 25px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .history-node {
+            width: 55px;
+            height: 55px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn { from { transform: scale(0); } to { transform: scale(1); } }
+
+        .node-empty { background: rgba(255,255,255,0.05); border: 2px dashed rgba(255,255,255,0.1); box-shadow: none; }
+        .node-b { background: linear-gradient(135deg, #ff4d4d, #cc0000); }
+        .node-p { background: linear-gradient(135deg, #4d94ff, #005ce6); }
+        .node-t { background: linear-gradient(135deg, #4dff4d, #00b300); }
+        .node-tai { background: linear-gradient(135deg, #222, #000); border: 2px solid #444; }
+        .node-xiu { background: linear-gradient(135deg, #fff, #ccc); color: #000; }
+
+        /* Bảng điều khiển (Nút bấm) */
+        .control-panel {
+            background: var(--bg-secondary);
+            backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .btn-grid {
+            border: none;
+            border-radius: 15px;
+            padding: 20px 0;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.1s;
+            box-shadow: 0 6px 0 rgba(0,0,0,0.5);
+        }
+
+        .btn-grid:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(0,0,0,0.5); }
+
+        .btn-b { background: linear-gradient(135deg, #ff4d4d, #cc0000); box-shadow: 0 6px 0 #800000; }
+        .btn-p { background: linear-gradient(135deg, #4d94ff, #005ce6); box-shadow: 0 6px 0 #003380; }
+        .btn-t { background: linear-gradient(135deg, #4dff4d, #00b300); box-shadow: 0 6px 0 #006600; }
+        .btn-tai { background: linear-gradient(135deg, #333, #000); box-shadow: 0 6px 0 #000; border: 1px solid #555; }
+        .btn-xiu { background: linear-gradient(135deg, #fff, #b3b3b3); color: #000; box-shadow: 0 6px 0 #666; }
+        .btn-undo { background: linear-gradient(135deg, #999, #555); box-shadow: 0 6px 0 #222; }
+
+        /* Nút Phân Tích */
+        .btn-analyze {
+            width: 100%;
+            padding: 18px;
+            border-radius: 15px;
+            background: var(--accent-gradient);
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 900;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 20px var(--accent-glow);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-analyze:active { transform: scale(0.98); }
+
+        /* =========================================
+           MODULE 7: LOADING & RESULT
+           ========================================= */
+        .loading-box { display: none; margin-top: 20px; text-align: center; }
+        .loading-text { font-family: 'Orbitron'; color: var(--accent); font-weight: 900; margin-bottom: 10px; font-size: 1.1rem; }
+        .progress-track { height: 15px; background: rgba(0,0,0,0.5); border-radius: 10px; overflow: hidden; border: 1px solid var(--border-color); }
+        .progress-bar { height: 100%; width: 0%; background: var(--accent-gradient); transition: width 0.1s linear; }
+
+        .result-panel {
+            display: none;
+            background: rgba(0,0,0,0.6);
+            border: 2px solid var(--accent);
+            border-radius: 20px;
+            padding: 25px;
+            margin-top: 20px;
+            text-align: center;
+            box-shadow: 0 0 30px var(--accent-glow);
+            animation: slideUp 0.4s;
+        }
+
+        .prediction-title {
+            font-family: 'Orbitron';
+            font-size: 3rem;
+            font-weight: 900;
+            margin: 15px 0;
+        }
+        .pred-b { color: #ff3333; text-shadow: 0 0 20px rgba(255,51,51,0.6); }
+        .pred-p { color: #3388ff; text-shadow: 0 0 20px rgba(51,136,255,0.6); }
+        .pred-tai { color: #fff; background: #000; border: 2px solid #333; padding: 5px 30px; border-radius: 15px; display: inline-block; }
+        .pred-xiu { color: #000; background: #fff; border: 2px solid #000; padding: 5px 30px; border-radius: 15px; display: inline-block; }
+
+        .ai-list {
+            display: none;
+            margin-top: 20px;
+            text-align: left;
+            max-height: 200px;
+            overflow-y: auto;
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+        }
+        .ai-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .sync-area {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px dashed rgba(255,255,255,0.2);
+        }
+        .sync-title { font-weight: 900; margin-bottom: 15px; font-size: 1rem; }
+        .sync-grid { display: flex; justify-content: center; gap: 15px; }
+        .sync-btn { width: 80px; height: 60px; font-size: 1.2rem; }
+        .sync-msg { font-weight: 900; font-size: 1.5rem; margin-top: 20px; }
+
+        /* =========================================
+           MODULE 8: ADMIN LISTS & SETTINGS
+           ========================================= */
+        .data-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+        }
+        .data-info { display: flex; flex-direction: column; gap: 5px; }
+        .data-name { font-weight: 900; font-size: 1rem; color: #fff; }
+        .data-sub { font-size: 0.85rem; color: var(--accent); font-weight: 800; }
+
+        .swatch-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 20px; }
+        .swatch { aspect-ratio: 1; border-radius: 50%; cursor: pointer; border: 3px solid transparent; transition: all 0.2s; }
+        .swatch.active { border-color: #fff; transform: scale(1.1); box-shadow: 0 0 15px #fff; }
+
+        .bg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .bg-thumb { height: 60px; border-radius: 10px; cursor: pointer; background-size: cover; background-position: center; border: 3px solid transparent; }
+        .bg-thumb.active { border-color: var(--accent); box-shadow: 0 0 15px var(--accent-glow); }
+
+        /* =========================================
+           MODULE 9: MUSIC WIDGET & TOAST
+           ========================================= */
+        .music-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--bg-secondary);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--accent);
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .music-btn {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .music-title { font-size: 0.9rem; font-weight: 800; color: #fff; max-width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-win);
+            color: #000;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 900;
+            z-index: 9999;
+            display: none;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        /* =========================================
+           MODULE 10: RESPONSIVE (MOBILE BOTTOM NAV)
+           ========================================= */
+        @media (max-width: 768px) {
+            .app-layout { flex-direction: column; }
+            
+            .sidebar {
+                position: fixed;
+                bottom: 0; left: 0; width: 100%;
+                height: 70px;
+                flex-direction: row;
+                padding: 0;
+                border-right: none;
+                border-top: 1px solid var(--border-color);
+                border-radius: 20px 20px 0 0;
+                background: rgba(15, 15, 19, 0.95);
+                z-index: 100;
+            }
+
+            .brand-logo, .user-profile { display: none; }
+
+            .menu-list {
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                width: 100%;
+                padding: 0 10px;
+            }
+
+            .menu-item {
+                flex-direction: column;
+                padding: 10px;
+                font-size: 0.7rem;
+                gap: 5px;
+                flex: 1;
+                text-align: center;
+            }
+            
+            .menu-item i { font-size: 1.3rem; }
+            .menu-item.active { transform: translateY(-10px); background: transparent; color: var(--accent); box-shadow: none; }
+            .menu-item.active i { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 10px var(--accent)); }
+
+            .main-content {
+                padding: 15px;
+                padding-bottom: 90px; /* Tránh bị che bởi bottom nav */
+                height: calc(100vh - 70px);
+            }
+
+            .auth-box { margin: 10px auto; padding: 30px 20px; }
+            .input-grid { grid-template-columns: repeat(4, 1fr); gap: 10px; }
+            .btn-grid { padding: 15px 0; font-size: 1.2rem; }
+            .history-node { width: 40px; height: 40px; font-size: 1.2rem; border-radius: 10px; }
+            .prediction-title { font-size: 2.2rem; }
+            .music-widget { bottom: 85px; right: 15px; padding: 8px 15px; } /* Nâng lên trên bottom nav */
+        }
+    </style>
+</head>
+<body class="theme-1 bg-1">
+    
+    <div id="bg-layer"></div>
+
+    <!-- =========================================
+         AUDIO ASSETS
+         ========================================= -->
+    <audio id="sfx-click" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" preload="auto"></audio>
+    <audio id="sfx-win" src="https://assets.mixkit.co/active_storage/sfx/2019/2019-preview.mp3" preload="auto"></audio>
+    <audio id="bgm" loop></audio>
+
+    <!-- =========================================
+         MUSIC WIDGET
+         ========================================= -->
+    <div class="music-widget" id="music-widget">
+        <button class="music-btn" id="btn-music">▶</button>
+        <div class="music-title" id="music-title">Đang tải...</div>
+        <button id="btn-next-music" style="background:none; border:none; color:#fff; cursor:pointer;"><i class="fas fa-forward"></i></button>
+    </div>
+
+    <!-- =========================================
+         APP LAYOUT
+         ========================================= -->
+    <div class="app-layout">
+        
+        <!-- SIDEBAR (BOTTOM NAV ON MOBILE) -->
+        <aside class="sidebar" id="sidebar" style="display: none;">
+            <div class="brand-logo">ChiHao <span>⚡️</span></div>
+            
+            <div class="menu-list" id="nav-admin">
+                <button class="menu-item active" data-tab="admin-bcr"><i class="fas fa-dice"></i> Baccarat</button>
+                <button class="menu-item" data-tab="admin-tx"><i class="fas fa-dice-d6"></i> Tài Xỉu</button>
+                <button class="menu-item" data-tab="admin-acc"><i class="fas fa-users"></i> Tài Khoản</button>
+                <button class="menu-item" data-tab="admin-his"><i class="fas fa-history"></i> Lịch Sử</button>
+                <button class="menu-item" data-tab="admin-sys"><i class="fas fa-cogs"></i> Hệ Thống</button>
+            </div>
+
+            <div class="menu-list" id="nav-user" style="display: none;">
+                <button class="menu-item active" data-tab="user-bcr"><i class="fas fa-dice"></i> Baccarat</button>
+                <button class="menu-item" data-tab="user-tx"><i class="fas fa-dice-d6"></i> Tài Xỉu</button>
+            </div>
+
+            <div class="user-profile" id="profile-box">
+                <div class="avatar" id="profile-avatar"><i class="fas fa-user-shield"></i></div>
+                <div class="user-info">
+                    <h4 id="profile-name">Admin</h4>
+                    <p id="profile-coins">Vô Hạn Xu</p>
+                </div>
+            </div>
+
+            <button class="btn-logout" id="btn-logout"><i class="fas fa-sign-out-alt"></i> Đăng Xuất</button>
+        </aside>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="main-content">
+            
+            <!-- =====================================
+                 SCREEN: LOGIN
+                 ===================================== -->
+            <div id="screen-login" class="screen active">
+                <div class="auth-box">
+                    <h2>Đăng Nhập</h2>
+                    <div class="input-group">
+                        <label>Tên đăng nhập</label>
+                        <input type="text" id="login-user" class="input-field" placeholder="Nhập tên...">
+                    </div>
+                    <div class="input-group">
+                        <label>Mật khẩu</label>
+                        <input type="password" id="login-pass" class="input-field" placeholder="Nhập mật khẩu...">
+                    </div>
+                    <button class="btn-primary" id="btn-login">Tiếp Tục</button>
+                    <div id="login-err" class="error-text">Sai tài khoản hoặc mật khẩu!</div>
+                </div>
+            </div>
+
+            <!-- =====================================
+                 SCREEN: PIN
+                 ===================================== -->
+            <div id="screen-pin" class="screen">
+                <div class="auth-box">
+                    <h2>Xác Thực Admin</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 20px;">Nhập mã PIN 6 số</p>
+                    <div class="pin-container">
+                        <input type="tel" maxlength="1" class="pin-box" data-idx="0">
+                        <input type="tel" maxlength="1" class="pin-box" data-idx="1">
+                        <input type="tel" maxlength="1" class="pin-box" data-idx="2">
+                        <input type="tel" maxlength="1" class="pin-box" data-idx="3">
+                        <input type="tel" maxlength="1" class="pin-box" data-idx="4">
+                        <input type="tel" maxlength="1" class="pin-box" data-idx="5">
+                    </div>
+                    <button class="btn-primary" id="btn-verify-pin">Xác Nhận</button>
+                    <button class="btn-logout" id="btn-back-login" style="margin-top: 15px;">Quay lại</button>
+                    <div id="pin-err" class="error-text">Mã PIN không đúng!</div>
+                </div>
+            </div>
+
+            <!-- =====================================
+                 SCREEN: DASHBOARD (ADMIN & USER)
+                 ===================================== -->
+            <div id="screen-dashboard" class="screen">
+                
+                <!-- --- ADMIN TABS --- -->
+                <div id="tab-admin-bcr" class="tab-pane active">
+                    <div class="game-header"><h2>Baccarat (15 AI)</h2></div>
+                    <div class="history-board" id="hist-admin-bcr"></div>
+                    <div class="control-panel">
+                        <div class="input-grid">
+                            <button class="btn-grid btn-b" data-type="bcr" data-val="B" data-isuser="false">B</button>
+                            <button class="btn-grid btn-p" data-type="bcr" data-val="P" data-isuser="false">P</button>
+                            <button class="btn-grid btn-t" data-type="bcr" data-val="T" data-isuser="false">T</button>
+                            <button class="btn-grid btn-undo" data-type="bcr" data-action="undo" data-isuser="false"><i class="fas fa-backspace"></i></button>
+                        </div>
+                        <button class="btn-analyze" id="btn-run-admin-bcr">Phân Tích Ngay</button>
+                    </div>
+                    <div class="loading-box" id="load-admin-bcr">
+                        <div class="loading-text" id="txt-admin-bcr">AI đang xử lý... 0%</div>
+                        <div class="progress-track"><div class="progress-bar" id="bar-admin-bcr"></div></div>
+                    </div>
+                    <div class="result-panel" id="res-admin-bcr">
+                        <div style="color: var(--text-muted); font-weight: 800;">Dự đoán:</div>
+                        <div class="prediction-title" id="pred-admin-bcr">-</div>
+                        <button class="btn-logout" id="btn-list-admin-bcr" style="width: auto; padding: 8px 20px; margin-bottom: 15px; font-size: 0.8rem;"><i class="fas fa-list"></i> Chi tiết AI</button>
+                        <div class="ai-list" id="list-admin-bcr"></div>
+                        <div class="sync-area">
+                            <div class="sync-title">Kết quả thực tế:</div>
+                            <div class="sync-grid">
+                                <button class="btn-grid btn-b sync-btn" data-type="bcr" data-val="B" data-isuser="false">B</button>
+                                <button class="btn-grid btn-p sync-btn" data-type="bcr" data-val="P" data-isuser="false">P</button>
+                            </div>
+                            <div class="sync-msg" id="msg-admin-bcr"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-admin-tx" class="tab-pane">
+                    <div class="game-header"><h2>Tài Xỉu (15 AI)</h2></div>
+                    <div class="history-board" id="hist-admin-tx"></div>
+                    <div class="control-panel">
+                        <div class="input-grid" style="grid-template-columns: 1fr 1fr;">
+                            <button class="btn-grid btn-tai" data-type="tx" data-val="T" data-isuser="false">TÀI</button>
+                            <button class="btn-grid btn-xiu" data-type="tx" data-val="X" data-isuser="false">XỈU</button>
+                        </div>
+                        <button class="btn-grid btn-undo" data-type="tx" data-action="undo" data-isuser="false" style="width: 100%; margin-bottom: 20px; padding: 15px; font-size: 1rem;"><i class="fas fa-backspace"></i> Xóa Cầu Cuối</button>
+                        <button class="btn-analyze" id="btn-run-admin-tx">Phân Tích Ngay</button>
+                    </div>
+                    <div class="loading-box" id="load-admin-tx">
+                        <div class="loading-text" id="txt-admin-tx">AI đang xử lý... 0%</div>
+                        <div class="progress-track"><div class="progress-bar" id="bar-admin-tx"></div></div>
+                    </div>
+                    <div class="result-panel" id="res-admin-tx">
+                        <div style="color: var(--text-muted); font-weight: 800;">Dự đoán:</div>
+                        <div class="prediction-title" id="pred-admin-tx">-</div>
+                        <button class="btn-logout" id="btn-list-admin-tx" style="width: auto; padding: 8px 20px; margin-bottom: 15px; font-size: 0.8rem;"><i class="fas fa-list"></i> Chi tiết AI</button>
+                        <div class="ai-list" id="list-admin-tx"></div>
+                        <div class="sync-area">
+                            <div class="sync-title">Kết quả thực tế:</div>
+                            <div class="sync-grid">
+                                <button class="btn-grid btn-tai sync-btn" data-type="tx" data-val="T" data-isuser="false" style="width: 100px;">TÀI</button>
+                                <button class="btn-grid btn-xiu sync-btn" data-type="tx" data-val="X" data-isuser="false" style="width: 100px;">XỈU</button>
+                            </div>
+                            <div class="sync-msg" id="msg-admin-tx"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-admin-acc" class="tab-pane">
+                    <div class="game-header"><h2>Quản Lý Tài Khoản</h2></div>
+                    <div class="control-panel" style="margin-bottom: 30px;">
+                        <h3 style="margin-bottom: 15px; color: var(--accent);">Tạo Tài Khoản</h3>
+                        <input type="text" id="new-u" class="input-field" placeholder="Tên..." style="margin-bottom: 10px;">
+                        <input type="text" id="new-p" class="input-field" placeholder="Mật khẩu..." style="margin-bottom: 10px;">
+                        <input type="number" id="new-c" class="input-field" placeholder="Số xu..." style="margin-bottom: 15px;">
+                        <button class="btn-primary" id="btn-create-acc">Tạo Ngay</button>
+                    </div>
+                    <div class="control-panel">
+                        <h3 style="margin-bottom: 15px; color: var(--accent);">Cấp Xu</h3>
+                        <input type="text" id="give-u" class="input-field" placeholder="Tên..." style="margin-bottom: 10px;">
+                        <input type="number" id="give-c" class="input-field" placeholder="Số xu..." style="margin-bottom: 15px;">
+                        <button class="btn-primary" id="btn-give-coins">Cấp Xu</button>
+                    </div>
+                    <h3 style="margin-top: 30px; margin-bottom: 15px;">Danh Sách</h3>
+                    <div id="admin-acc-list"></div>
+                </div>
+
+                <div id="tab-admin-his" class="tab-pane">
+                    <div class="game-header"><h2>Lịch Sử Hệ Thống</h2></div>
+                    <div id="admin-his-list"></div>
+                </div>
+
+                <div id="tab-admin-sys" class="tab-pane">
+                    <div class="game-header"><h2>Cài Đặt Hệ Thống</h2></div>
+                    <div class="control-panel" style="margin-bottom: 30px;">
+                        <h3 style="margin-bottom: 15px; color: var(--accent);">Quản Lý Nhạc</h3>
+                        <input type="text" id="set-m-title" class="input-field" placeholder="Tên bài hát..." style="margin-bottom: 10px;">
+                        <input type="text" id="set-m-src" class="input-field" placeholder="Link MP3..." style="margin-bottom: 15px;">
+                        <button class="btn-primary" id="btn-save-music">Lưu Nhạc</button>
+                    </div>
+                    <div class="control-panel">
+                        <h3 style="margin-bottom: 15px; color: var(--accent);">Màu Sắc (10 Themes)</h3>
+                        <div class="swatch-grid" id="swatch-themes"></div>
+                        <h3 style="margin-bottom: 15px; color: var(--accent);">Hình Nền (6 Anime BGs)</h3>
+                        <div class="bg-grid" id="swatch-bgs"></div>
+                    </div>
+                </div>
+
+                <!-- --- USER TABS --- -->
+                <div id="tab-user-bcr" class="tab-pane">
+                    <div class="game-header"><h2>Baccarat (Tốn 2 Xu)</h2></div>
+                    <div class="history-board" id="hist-user-bcr"></div>
+                    <div class="control-panel">
+                        <div class="input-grid">
+                            <button class="btn-grid btn-b" data-type="bcr" data-val="B" data-isuser="true">B</button>
+                            <button class="btn-grid btn-p" data-type="bcr" data-val="P" data-isuser="true">P</button>
+                            <button class="btn-grid btn-t" data-type="bcr" data-val="T" data-isuser="true">T</button>
+                            <button class="btn-grid btn-undo" data-type="bcr" data-action="undo" data-isuser="true"><i class="fas fa-backspace"></i></button>
+                        </div>
+                        <button class="btn-analyze" id="btn-run-user-bcr">Phân Tích Ngay</button>
+                    </div>
+                    <div class="loading-box" id="load-user-bcr">
+                        <div class="loading-text" id="txt-user-bcr">AI đang xử lý... 0%</div>
+                        <div class="progress-track"><div class="progress-bar" id="bar-user-bcr"></div></div>
+                    </div>
+                    <div class="result-panel" id="res-user-bcr">
+                        <div style="color: var(--text-muted); font-weight: 800;">Dự đoán:</div>
+                        <div class="prediction-title" id="pred-user-bcr">-</div>
+                        <button class="btn-logout" id="btn-list-user-bcr" style="width: auto; padding: 8px 20px; margin-bottom: 15px; font-size: 0.8rem;"><i class="fas fa-list"></i> Chi tiết AI</button>
+                        <div class="ai-list" id="list-user-bcr"></div>
+                        <div class="sync-area">
+                            <div class="sync-title">Kết quả thực tế:</div>
+                            <div class="sync-grid">
+                                <button class="btn-grid btn-b sync-btn" data-type="bcr" data-val="B" data-isuser="true">B</button>
+                                <button class="btn-grid btn-p sync-btn" data-type="bcr" data-val="P" data-isuser="true">P</button>
+                            </div>
+                            <div class="sync-msg" id="msg-user-bcr"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-user-tx" class="tab-pane">
+                    <div class="game-header"><h2>Tài Xỉu (Tốn 2 Xu)</h2></div>
+                    <div class="history-board" id="hist-user-tx"></div>
+                    <div class="control-panel">
+                        <div class="input-grid" style="grid-template-columns: 1fr 1fr;">
+                            <button class="btn-grid btn-tai" data-type="tx" data-val="T" data-isuser="true">TÀI</button>
+                            <button class="btn-grid btn-xiu" data-type="tx" data-val="X" data-isuser="true">XỈU</button>
+                        </div>
+                        <button class="btn-grid btn-undo" data-type="tx" data-action="undo" data-isuser="true" style="width: 100%; margin-bottom: 20px; padding: 15px; font-size: 1rem;"><i class="fas fa-backspace"></i> Xóa Cầu Cuối</button>
+                        <button class="btn-analyze" id="btn-run-user-tx">Phân Tích Ngay</button>
+                    </div>
+                    <div class="loading-box" id="load-user-tx">
+                        <div class="loading-text" id="txt-user-tx">AI đang xử lý... 0%</div>
+                        <div class="progress-track"><div class="progress-bar" id="bar-user-tx"></div></div>
+                    </div>
+                    <div class="result-panel" id="res-user-tx">
+                        <div style="color: var(--text-muted); font-weight: 800;">Dự đoán:</div>
+                        <div class="prediction-title" id="pred-user-tx">-</div>
+                        <button class="btn-logout" id="btn-list-user-tx" style="width: auto; padding: 8px 20px; margin-bottom: 15px; font-size: 0.8rem;"><i class="fas fa-list"></i> Chi tiết AI</button>
+                        <div class="ai-list" id="list-user-tx"></div>
+                        <div class="sync-area">
+                            <div class="sync-title">Kết quả thực tế:</div>
+                            <div class="sync-grid">
+                                <button class="btn-grid btn-tai sync-btn" data-type="tx" data-val="T" data-isuser="true" style="width: 100px;">TÀI</button>
+                                <button class="btn-grid btn-xiu sync-btn" data-type="tx" data-val="X" data-isuser="true" style="width: 100px;">XỈU</button>
+                            </div>
+                            <div class="sync-msg" id="msg-user-tx"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <div class="toast" id="toast">Thành công!</div>
+
+    <!-- =========================================
+         APPLICATION SCRIPT (ULTIMATE V13)
+         ========================================= -->
+    <script>
+        /**
+         * HỆ THỐNG QUẢN LÝ CHÍNH (APP CONTROLLER)
+         * Chứa toàn bộ logic xử lý trạng thái, giao diện và AI.
+         */
+        const App = {
+            // Cấu hình hệ thống
+            Config: {
+                rootAdmin: "chihaocute8386",
+                rootPass: "chihao2010",
+                rootPin: "168211",
+                analysisCost: 2
+            },
+
+            // Trạng thái ứng dụng
+            State: {
+                accounts: [],
+                history: [],
+                sysConfig: {},
+                currentUser: null,
+                tempUser: null,
+                gameHistory: { bcr: [], tx: [] },
+                currentPred: null,
+                isPlaying: false
+            },
+
+            // Khởi tạo ban đầu
+            Init() {
+                // 1. Tải dữ liệu tài khoản
+                const savedAccs = localStorage.getItem('chihao_accs_v13');
+                if (savedAccs) {
+                    this.State.accounts = JSON.parse(savedAccs);
+                } else {
+                    this.State.accounts = [{
+                        username: this.Config.rootAdmin,
+                        pass: this.Config.rootPass,
+                        coins: 999999999,
+                        role: "admin"
+                    }];
+                    this.SaveData('accounts');
+                }
+
+                // 2. Tải lịch sử
+                const savedHist = localStorage.getItem('chihao_hist_v13');
+                if (savedHist) this.State.history = JSON.parse(savedHist);
+
+                // 3. Tải cấu hình giao diện
+                const savedSys = localStorage.getItem('chihao_sys_v13');
+                if (savedSys) {
+                    this.State.sysConfig = JSON.parse(savedSys);
+                } else {
+                    this.State.sysConfig = { theme: 'theme-1', bg: 'bg-1', musicTitle: 'Remix Anime 2026', musicSrc: 'nhac1.mp3' };
+                    this.SaveData('sys');
+                }
+
+                this.Audio.init();
+                this.UI.applySystemUI();
+            },
+
+            // Hàm lưu dữ liệu
+            SaveData(type) {
+                if (type === 'accounts') localStorage.setItem('chihao_accs_v13', JSON.stringify(this.State.accounts));
+                if (type === 'history') localStorage.setItem('chihao_hist_v13', JSON.stringify(this.State.history));
+                if (type === 'sys') localStorage.setItem('chihao_sys_v13', JSON.stringify(this.State.sysConfig));
+            },
+
+            // Thông báo
+            Toast(msg, isErr = false) {
+                const el = document.getElementById('toast');
+                el.innerText = msg;
+                el.style.background = isErr ? 'rgba(255,51,51,0.95)' : 'rgba(0,255,136,0.95)';
+                el.style.display = 'block';
+                setTimeout(() => el.style.display = 'none', 2500);
+            },
+
+            // --- AUDIO MODULE ---
+            Audio: {
+                bgm: document.getElementById('bgm'),
+                sfxClick: document.getElementById('sfx-click'),
+                sfxWin: document.getElementById('sfx-win'),
+
+                init() {
+                    this.bgm.src = App.State.sysConfig.musicSrc;
+                    document.getElementById('music-title').innerText = App.State.sysConfig.musicTitle;
+                    document.getElementById('set-m-title').value = App.State.sysConfig.musicTitle;
+                    document.getElementById('set-m-src').value = App.State.sysConfig.musicSrc;
+                },
+
+                playClick() {
+                    this.sfxClick.currentTime = 0;
+                    this.sfxClick.volume = 0.3;
+                    this.sfxClick.play().catch(e => {});
+                },
+
+                playWin() {
+                    this.sfxWin.currentTime = 0;
+                    this.sfxWin.volume = 0.5;
+                    this.sfxWin.play().catch(e => {});
+                },
+
+                toggleMusic() {
+                    this.playClick();
+                    if (App.State.isPlaying) {
+                        this.bgm.pause();
+                        document.getElementById('btn-music').innerHTML = '<i class="fas fa-play"></i>';
+                    } else {
+                        this.bgm.play().catch(e => App.Toast("Lỗi file nhạc!", true));
+                        document.getElementById('btn-music').innerHTML = '<i class="fas fa-pause"></i>';
+                    }
+                    App.State.isPlaying = !App.State.isPlaying;
+                },
+
+                nextSong() {
+                    this.playClick();
+                    this.bgm.currentTime = 0;
+                    if (App.State.isPlaying) this.bgm.play();
+                },
+
+                saveConfig() {
+                    this.playClick();
+                    const title = document.getElementById('set-m-title').value.trim();
+                    const src = document.getElementById('set-m-src').value.trim();
+                    if (!title || !src) return App.Toast("Nhập thiếu thông tin!", true);
+
+                    App.State.sysConfig.musicTitle = title;
+                    App.State.sysConfig.musicSrc = src;
+                    App.SaveData('sys');
+
+                    document.getElementById('music-title').innerText = title;
+                    this.bgm.src = src;
+                    App.State.isPlaying = false;
+                    document.getElementById('btn-music').innerHTML = '<i class="fas fa-play"></i>';
+                    App.Toast("Đã lưu nhạc!");
+                }
+            },
+
+            // --- AUTH MODULE ---
+            Auth: {
+                checkCredentials() {
+                    App.Audio.playClick();
+                    const u = document.getElementById('login-user').value;
+                    const p = document.getElementById('login-pass').value;
+                    const err = document.getElementById('login-err');
+
+                    const acc = App.State.accounts.find(a => a.username === u && a.pass === p);
+                    if (acc) {
+                        err.style.display = 'none';
+                        App.State.tempUser = acc;
+
+                        if (acc.username === App.Config.rootAdmin) {
+                            document.getElementById('screen-login').classList.remove('active');
+                            document.getElementById('screen-pin').classList.add('active');
+                            document.querySelector('.pin-box').focus();
+                        } else {
+                            this.completeLogin(acc);
+                        }
+                    } else {
+                        err.style.display = 'block';
+                    }
+                },
+
+                verifyPin() {
+                    App.Audio.playClick();
+                    const inputs = document.querySelectorAll('.pin-box');
+                    let pin = "";
+                    inputs.forEach(i => pin += i.value);
+
+                    if (pin === App.Config.rootPin) {
+                        document.getElementById('pin-err').style.display = 'none';
+                        document.getElementById('screen-pin').classList.remove('active');
+                        this.completeLogin(App.State.tempUser);
+                    } else {
+                        document.getElementById('pin-err').style.display = 'block';
+                        inputs.forEach(i => i.value = '');
+                        inputs[0].focus();
+                    }
+                },
+
+                backToLogin() {
+                    App.Audio.playClick();
+                    document.getElementById('screen-pin').classList.remove('active');
+                    document.getElementById('screen-login').classList.add('active');
+                    document.getElementById('login-pass').value = '';
+                    App.State.tempUser = null;
+                },
+
+                completeLogin(acc) {
+                    App.State.currentUser = acc;
+                    document.getElementById('screen-login').classList.remove('active');
+                    document.getElementById('screen-pin').classList.remove('active');
+                    document.getElementById('screen-dashboard').classList.add('active');
+                    document.getElementById('sidebar').style.display = 'flex';
+
+                    if (acc.role === 'admin') {
+                        document.getElementById('nav-admin').style.display = 'flex';
+                        document.getElementById('nav-user').style.display = 'none';
+                        document.getElementById('profile-avatar').innerHTML = '<i class="fas fa-user-shield"></i>';
+                        document.getElementById('profile-name').innerText = acc.username;
+                        document.getElementById('profile-coins').innerText = "Vô Hạn Xu";
+                        App.Admin.renderList();
+                        App.UI.renderSettingsSwatches();
+                        App.UI.switchTab('admin-bcr', document.querySelector('#nav-admin .menu-item'));
+                    } else {
+                        document.getElementById('nav-admin').style.display = 'none';
+                        document.getElementById('nav-user').style.display = 'flex';
+                        document.getElementById('profile-avatar').innerHTML = '<i class="fas fa-user"></i>';
+                        document.getElementById('profile-name').innerText = acc.username;
+                        this.updateUserUI();
+                        App.UI.switchTab('user-bcr', document.querySelector('#nav-user .menu-item'));
+                    }
+
+                    // Reset game
+                    App.State.gameHistory = { bcr: [], tx: [] };
+                    App.Game.renderTrack('bcr', acc.role === 'admin');
+                    App.Game.renderTrack('tx', acc.role === 'admin');
+                },
+
+                logout() {
+                    App.Audio.playClick();
+                    App.State.currentUser = null;
+                    document.getElementById('screen-dashboard').classList.remove('active');
+                    document.getElementById('screen-login').classList.add('active');
+                    document.getElementById('sidebar').style.display = 'none';
+                    document.getElementById('login-user').value = '';
+                    document.getElementById('login-pass').value = '';
+                },
+
+                updateUserUI() {
+                    if (!App.State.currentUser) return;
+                    document.getElementById('profile-coins').innerText = `💰 ${App.State.currentUser.coins} Xu`;
+                }
+            },
+
+            // --- UI MODULE ---
+            UI: {
+                switchTab(tabId, btn) {
+                    App.Audio.playClick();
+                    const menu = btn.closest('.menu-list');
+                    if(menu) menu.querySelectorAll('.menu-item').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    document.querySelectorAll('.tab-pane').forEach(t => t.classList.remove('active'));
+                    const target = document.getElementById('tab-' + tabId);
+                    if(target) target.classList.add('active');
+
+                    if (tabId.includes('his')) this.renderHistory(tabId.includes('user'));
+                },
+
+                applySystemUI() {
+                    document.body.className = `${App.State.sysConfig.theme} ${App.State.sysConfig.bg}`;
+                    document.getElementById('bg-layer').style.backgroundImage = `var(--bg-url)`;
+                },
+
+                renderSettingsSwatches() {
+                    const themeGrid = document.getElementById('swatch-themes');
+                    const bgGrid = document.getElementById('swatch-bgs');
+                    
+                    themeGrid.innerHTML = '';
+                    const colors = ['#ff8c00','#00e5ff','#ff0055','#00ff88','#fceb00','#c700ff','#ff0044','#00ffcc','#ffffff','#ff6b00'];
+                    colors.forEach((c, i) => {
+                        const sw = document.createElement('div');
+                        sw.className = `swatch ${App.State.sysConfig.theme === 'theme-' + (i+1) ? 'active' : ''}`;
+                        sw.style.background = c;
+                        sw.onclick = () => {
+                            App.Audio.playClick();
+                            App.State.sysConfig.theme = 'theme-' + (i+1);
+                            App.SaveData('sys'); this.applySystemUI(); this.renderSettingsSwatches();
+                        };
+                        themeGrid.appendChild(sw);
+                    });
+
+                    bgGrid.innerHTML = '';
+                    const bgImgs = [
+                        'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=200&auto=format&fit=crop',
+                        'https://images.unsplash.com/photo-1618336753974-aae8e04506aa?q=80&w=200&auto=format&fit=crop',
+                        'https://images.unsplash.com/photo-1628260412297-a3377e45006f?q=80&w=200&auto=format&fit=crop',
+                        'https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=200&auto=format&fit=crop',
+                        'https://images.unsplash.com/photo-1581833971358-2c5509b8c150?q=80&w=200&auto=format&fit=crop',
+                        'https://images.unsplash.com/photo-1542451313-32e813a2c221?q=80&w=200&auto=format&fit=crop'
+                    ];
+                    bgImgs.forEach((img, i) => {
+                        const div = document.createElement('div');
+                        div.className = `bg-thumb ${App.State.sysConfig.bg === 'bg-' + (i+1) ? 'active' : ''}`;
+                        div.style.backgroundImage = `url(${img})`;
+                        div.onclick = () => {
+                            App.Audio.playClick();
+                            App.State.sysConfig.bg = 'bg-' + (i+1);
+                            App.SaveData('sys'); this.applySystemUI(); this.renderSettingsSwatches();
+                        };
+                        bgGrid.appendChild(div);
+                    });
+                },
+
+                renderHistory(isUser) {
+                    const list = document.getElementById(isUser ? 'admin-his-list' : 'admin-his-list'); // User không có tab lịch sử riêng
+                    if(!list) return; 
+                    const filtered = isUser ? App.State.history.filter(h => h.user === App.State.currentUser.username) : App.State.history;
+                    
+                    if (filtered.length === 0) {
+                        list.innerHTML = '<div style="text-align:center;color:#fff; padding:20px;">Chưa có lịch sử.</div>';
+                        return;
+                    }
+                    list.innerHTML = '';
+                    filtered.forEach(h => {
+                        const d = document.createElement('div');
+                        d.className = 'data-card';
+                        d.innerHTML = `
+                            <div class="data-info">
+                                <span class="data-name">${h.game}</span>
+                                <span style="font-size:0.8rem; color:#ccc;">${h.time}</span>
+                                <span style="font-size:0.9rem; color:#fff;">Dự đoán: <b style="color:var(--accent)">${h.predict}</b> | Thực tế: <b>${h.actual}</b></span>
+                            </div>
+                            <div style="font-weight:900; color:${h.status === 'Thắng' ? 'var(--color-win)' : 'var(--color-lose)'}; font-size:1.1rem;">${h.status}</div>
+                        `;
+                        list.appendChild(d);
+                    });
+                }
+            },
+
+            // --- ADMIN MODULE ---
+            Admin: {
+                renderList() {
+                    const list = document.getElementById('admin-acc-list');
+                    list.innerHTML = '';
+                    App.State.accounts.forEach((acc, i) => {
+                        const isRoot = acc.username === App.Config.rootAdmin;
+                        const div = document.createElement('div');
+                        div.className = 'data-card';
+                        div.innerHTML = `
+                            <div class="data-info">
+                                <span class="data-name">${acc.role === 'admin' ? '🛡️' : '👤'} ${acc.username}</span>
+                                <span class="data-sub">💰 ${acc.role === 'admin' ? 'Vô hạn' : acc.coins + ' xu'} | Pass: ${acc.pass}</span>
+                            </div>
+                            ${isRoot ? '' : `<button class="btn-logout" style="width:auto; padding:6px 12px; margin:0; font-size:0.8rem;" onclick="App.Admin.deleteUser(${i})">Xóa</button>`}
+                        `;
+                        list.appendChild(div);
+                    });
+                },
+                createUser() {
+                    App.Audio.playClick();
+                    const u = document.getElementById('new-u').value.trim();
+                    const p = document.getElementById('new-p').value.trim();
+                    const c = parseInt(document.getElementById('new-c').value) || 0;
+                    if (!u || !p) return App.Toast("Nhập đủ Tên và Pass!", true);
+                    if (App.State.accounts.find(a => a.username.toLowerCase() === u.toLowerCase())) return App.Toast("Tên đã tồn tại!", true);
+
+                    App.State.accounts.push({ username: u, pass: p, coins: c, role: "user" });
+                    App.SaveData('accounts'); this.renderList();
+                    document.getElementById('new-u').value = ''; document.getElementById('new-p').value = ''; document.getElementById('new-c').value = '';
+                    App.Toast(`Đã tạo User: ${u}`);
+                },
+                addCoins() {
+                    App.Audio.playClick();
+                    const u = document.getElementById('give-u').value.trim();
+                    const c = parseInt(document.getElementById('give-c').value) || 0;
+                    if (!u || c <= 0) return App.Toast("Nhập sai!", true);
+                    
+                    const acc = App.State.accounts.find(a => a.username.toLowerCase() === u.toLowerCase());
+                    if (acc) {
+                        acc.coins += c; App.SaveData('accounts'); this.renderList();
+                        document.getElementById('give-u').value = ''; document.getElementById('give-c').value = '';
+                        App.Toast(`Đã cấp ${c} xu.`);
+                    } else { App.Toast("Không tìm thấy User!", true); }
+                },
+                deleteUser(index) {
+                    App.Audio.playClick();
+                    if (App.State.accounts[index].username === App.Config.rootAdmin) return App.Toast("Không thể xóa Admin gốc!", true);
+                    if (confirm(`Xóa "${App.State.accounts[index].username}"?`)) {
+                        App.State.accounts.splice(index, 1);
+                        App.SaveData('accounts'); this.renderList(); App.Toast("Đã xóa!");
+                    }
+                }
+            },
+
+            // --- GAME MODULE ---
+            Game: {
+                addNode(type, val, isUser) {
+                    App.Audio.playClick();
+                    if (App.State.gameHistory[type].length >= 10) return App.Toast("Chỉ nhập tối đa 10 cầu!", true);
+                    App.State.gameHistory[type].push(val);
+                    this.renderTrack(type, isUser);
+                },
+                undoNode(type, isUser) {
+                    App.Audio.playClick();
+                    App.State.gameHistory[type].pop();
+                    this.renderTrack(type, isUser);
+                },
+                renderTrack(type, isUser) {
+                    const container = document.getElementById(`${isUser ? 'user' : 'admin'}-${type}-history`);
+                    if(!container) return;
+                    
+                    container.innerHTML = '';
+                    const hist = App.State.gameHistory[type];
+                    hist.forEach(val => {
+                        const div = document.createElement('div');
+                        let cls = '';
+                        if (type === 'bcr') cls = val === 'B' ? 'node-b' : (val === 'P' ? 'node-p' : 'node-t');
+                        else cls = val === 'T' ? 'node-tai' : 'node-xiu';
+                        div.className = `history-node ${cls}`;
+                        div.innerText = val;
+                        container.appendChild(div);
+                    });
+                    for(let i = hist.length; i < 10; i++) {
+                        const empty = document.createElement('div');
+                        empty.className = 'history-node node-empty';
+                        container.appendChild(empty);
+                    }
+                },
+                runAnalysis(type, isUser) {
+                    App.Audio.playClick();
+                    if (App.State.gameHistory[type].length < 10) return App.Toast("Nhập đủ 10 cầu!", true);
+                    if (isUser && App.State.currentUser.coins < App.Config.analysisCost) return App.Toast("Không đủ 2 xu!", true);
+                    
+                    if (isUser) {
+                        App.State.currentUser.coins -= App.Config.analysisCost;
+                        const idx = App.State.accounts.findIndex(a => a.username === App.State.currentUser.username);
+                        App.State.accounts[idx].coins = App.State.currentUser.coins;
+                        App.SaveData('accounts'); App.Auth.updateUserUI();
+                    }
+
+                    const prefix = isUser ? 'user-' : 'admin-';
+                    const loadBox = document.getElementById(`load-${prefix}${type}`);
+                    const loadTxt = document.getElementById(`txt-${prefix}${type}`);
+                    const bar = document.getElementById(`bar-${prefix}${type}`);
+                    const resBox = document.getElementById(`res-${prefix}${type}`);
+
+                    resBox.style.display = 'none';
+                    loadBox.style.display = 'block';
+                    bar.style.width = '0%';
+
+                    let prog = 0;
+                    const interval = setInterval(() => {
+                        prog++;
+                        bar.style.width = prog + '%';
+                        loadTxt.innerText = `Hội đồng AI đang phân tích... ${prog}%`;
+
+                        if (prog >= 100) {
+                            clearInterval(interval);
+                            setTimeout(() => {
+                                loadBox.style.display = 'none';
+                                this.executeAILogic(type, isUser);
+                            }, 200);
+                        }
+                    }, 30); 
+                },
+                executeAILogic(type, isUser) {
+                    const hist = App.State.gameHistory[type];
+                    const isBCR = type === 'bcr';
+                    let aiResults = [];
+
+                    if (isBCR) {
+                        let bCount = 0, pCount = 0, streakB = 0, streakP = 0;
+                        for (let c of hist) { if(c==='B'){bCount++;streakB++;streakP=0;} else if(c==='P'){pCount++;streakP++;streakB=0;} }
+                        const last = hist[hist.length - 1];
+                        
+                        for (let i = 1; i <= 15; i++) {
+                            let pred = 'B', reason = '';
+                            let rand = Math.random();
+                            if (i % 5 === 0) { pred = last === 'B' ? 'P' : 'B'; reason = "Bẻ cầu"; }
+                            else if (i % 5 === 1) { pred = last === 'T' ? 'B' : last; reason = "Bám cầu"; }
+                            else if (i % 5 === 2) { pred = bCount > pCount ? 'P' : 'B'; reason = "Cân bằng"; }
+                            else if (i % 5 === 3) { pred = streakB >= 3 ? 'P' : (streakP >= 3 ? 'B' : 'B'); reason = "Bệt"; }
+                            else { pred = rand > 0.5 ? 'B' : 'P'; reason = "Nhiễu"; }
+                            if (rand < 0.1) pred = pred === 'B' ? 'P' : 'B';
+                            aiResults.push({ name: `AI-${i<10?'0'+i:i}`, pred, reason });
+                        }
+                    } else {
+                        let tCount = 0, xCount = 0, streakT = 0, streakX = 0;
+                        for (let c of hist) { if(c==='T'){tCount++;streakT++;streakX=0;} else if(c==='X'){xCount++;streakX++;streakT=0;} }
+                        const last = hist[hist.length - 1];
+
+                        for (let i = 1; i <= 15; i++) {
+                            let pred = 'T', reason = '';
+                            let rand = Math.random();
+                            if (i % 5 === 0) { pred = last === 'T' ? 'X' : 'T'; reason = "Bẻ cầu"; }
+                            else if (i % 5 === 1) { pred = last; reason = "Bám cầu"; }
+                            else if (i % 5 === 2) { pred = tCount > xCount ? 'X' : 'T'; reason = "Cân bằng"; }
+                            else if (i % 5 === 3) { pred = streakT >= 3 ? 'X' : (streakX >= 3 ? 'T' : 'T'); reason = "Bệt"; }
+                            else { pred = rand > 0.5 ? 'T' : 'X'; reason = "Nhiễu"; }
+                            if (rand < 0.1) pred = pred === 'T' ? 'X' : 'T';
+                            aiResults.push({ name: `AI-${i<10?'0'+i:i}`, pred, reason });
+                        }
+                    }
+
+                    let finalT = aiResults.filter(a => a.pred === (isBCR?'B':'T')).length;
+                    let finalX = aiResults.filter(a => a.pred === (isBCR?'P':'X')).length;
+                    let finalPred = finalT > finalX ? (isBCR?'B':'T') : (isBCR?'P':'X');
+                    
+                    App.State.currentPred = finalPred;
+
+                    const prefix = isUser ? 'user-' : '';
+                    const predTxt = document.getElementById(`pred-${prefix}${type}`);
+                    const resBox = document.getElementById(`res-${prefix}${type}`);
+                    const list = document.getElementById(`list-${prefix}${type}`);
+
+                    if (isBCR) {
+                        predTxt.innerText = finalPred === 'B' ? 'BANKER (B)' : 'PLAYER (P)';
+                        predTxt.className = `prediction-title ${finalPred === 'B' ? 'pred-b' : 'pred-p'}`;
+                    } else {
+                        predTxt.innerText = finalPred === 'T' ? 'TÀI' : 'XỈU';
+                        predTxt.className = `prediction-title ${finalPred === 'T' ? 'pred-tai' : 'pred-xiu'}`;
+                    }
+
+                    resBox.style.display = 'block';
+                    list.innerHTML = '';
+                    aiResults.forEach(ai => {
+                        const d = document.createElement('div');
+                        d.className = 'ai-row';
+                        d.innerHTML = `<span>🤖 ${ai.name} (${ai.reason})</span><strong style="color:${ai.pred==='B'||ai.pred==='T'?'var(--accent)':'#3498db'}">${ai.pred}</strong>`;
+                        list.appendChild(d);
+                    });
+                    
+                    document.getElementById(`msg-${prefix}${type}`).innerText = '';
+                },
+                toggleAIList(type, isUser) {
+                    App.Audio.playClick();
+                    const l = document.getElementById(`${isUser ? 'user-' : ''}list-${type}`);
+                    l.style.display = l.style.display === 'block' ? 'none' : 'block';
+                },
+                syncResult(type, actual, isUser) {
+                    App.Audio.playClick();
+                    if (!App.State.currentPred) return;
+
+                    const prefix = isUser ? 'user-' : '';
+                    const msg = document.getElementById(`msg-${prefix}${type}`);
+                    const isWin = (actual === App.State.currentPred);
+
+                    msg.innerText = isWin ? "🎉 CHÍNH XÁC!" : "❌ SAI RỒI!";
+                    msg.style.color = isWin ? "var(--color-win)" : "var(--color-lose)";
+                    msg.style.textShadow = `0 0 20px ${isWin ? 'var(--color-win)' : 'var(--color-lose)'}`;
+                    
+                    if (isWin) App.Audio.playWin();
+
+                    App.State.history.unshift({
+                        user: App.State.currentUser.username,
+                        time: new Date().toLocaleString(),
+                        game: type === 'bcr' ? 'Baccarat' : 'Tài Xỉu',
+                        history: App.State.gameHistory[type].join(' '),
+                        predict: App.State.currentPred,
+                        actual: actual,
+                        status: isWin ? "Thắng" : "Thua"
+                    });
+                    App.SaveData('history');
+
+                    App.State.gameHistory[type] = [];
+                    this.renderTrack(type, isUser);
+                    App.State.currentPred = null;
+
+                    setTimeout(() => {
+                        document.getElementById(`res-${prefix}${type}`).style.display = 'none';
+                    }, 3000);
+                }
+            }
+        };
+
+        // =========================================
+        // EVENT LISTENERS INITIALIZATION
+        // =========================================
+        window.addEventListener('DOMContentLoaded', () => {
+            App.Init();
+
+            // Auth
+            document.getElementById('btn-login').addEventListener('click', () => App.Auth.checkCredentials());
+            document.getElementById('btn-verify-pin').addEventListener('click', () => App.Auth.verifyPin());
+            document.getElementById('btn-back-login').addEventListener('click', () => App.Auth.backToLogin());
+            document.getElementById('btn-logout').addEventListener('click', () => App.Auth.logout());
+
+            // PIN Input Auto-focus
+            document.querySelectorAll('.pin-box').forEach(input => {
+                input.addEventListener('input', (e) => {
+                    if (e.target.value.length === 1) {
+                        const idx = parseInt(e.target.dataset.idx);
+                        const next = document.querySelector(`.pin-box[data-idx="${idx + 1}"]`);
+                        if (next) next.focus();
+                    }
+                });
+            });
+
+            // Music
+            document.getElementById('btn-music').addEventListener('click', () => App.Audio.toggleMusic());
+            document.getElementById('btn-next-music').addEventListener('click', () => App.Audio.nextSong());
+            document.getElementById('btn-save-music').addEventListener('click', () => App.Audio.saveConfig());
+
+            // Navigation
+            document.querySelectorAll('.menu-item').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    App.UI.switchTab(this.dataset.tab, this);
+                });
+            });
+
+            // Admin Actions
+            document.getElementById('btn-create-acc').addEventListener('click', () => App.Admin.createUser());
+            document.getElementById('btn-give-coins').addEventListener('click', () => App.Admin.addCoins());
+
+            // Game Inputs
+            document.querySelectorAll('.btn-grid[data-action="undo"]').forEach(btn => {
+                btn.addEventListener('click', function() { App.Game.undoNode(this.dataset.type, this.dataset.isuser === 'true'); });
+            });
+            document.querySelectorAll('.btn-grid[data-val]').forEach(btn => {
+                if(btn.classList.contains('sync-btn')) return;
+                btn.addEventListener('click', function() { App.Game.addNode(this.dataset.type, this.dataset.val, this.dataset.isuser === 'true'); });
+            });
+
+            // Run Analysis
+            document.getElementById('btn-run-admin-bcr').addEventListener('click', () => App.Game.runAnalysis('bcr', false));
+            document.getElementById('btn-run-admin-tx').addEventListener('click', () => App.Game.runAnalysis('tx', false));
+            document.getElementById('btn-run-user-bcr').addEventListener('click', () => App.Game.runAnalysis('bcr', true));
+            document.getElementById('btn-run-user-tx').addEventListener('click', () => App.Game.runAnalysis('tx', true));
+
+            // Toggle AI List
+            document.getElementById('btn-list-admin-bcr').addEventListener('click', () => App.Game.toggleAIList('bcr', false));
+            document.getElementById('btn-list-admin-tx').addEventListener('click', () => App.Game.toggleAIList('tx', false));
+            document.getElementById('btn-list-user-bcr').addEventListener('click', () => App.Game.toggleAIList('bcr', true));
+            document.getElementById('btn-list-user-tx').addEventListener('click', () => App.Game.toggleAIList('tx', true));
+
+            // Sync Results
+            document.querySelectorAll('.sync-btn').forEach(btn => {
+                btn.addEventListener('click', function() { App.Game.syncResult(this.dataset.type, this.dataset.val, this.dataset.isuser === 'true'); });
+            });
+        });
+    </script>
+</body>
+</html>
